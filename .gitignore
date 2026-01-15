@@ -3,4 +3,5 @@ __pycache__/
 z_try/
 *.log
 input/
-nqueens-test.py
+notneeded_code/nqueens-test.py
+notneeded_code/
