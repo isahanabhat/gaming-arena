@@ -9,110 +9,199 @@
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
 </head>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const grid = {{ grid | tojson }};
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                const cell = document.getElementById(`v${i}${j}`);
+                if (grid[i][j] !== 0) {
+                    cell.value = grid[i][j];
+                    cell.readOnly = true;
+
+                }
+            }
+        }
+    });
+
+</script>
+
 <body>
+    <!--
     <div class="grid-image">
         <img src="{{ url_for('static', filename='playing-board.png') }}" width="640" height="660"/>
     </div>
-
+    -->
     <div id="grid">
+        <!--
         <div id="row-0" class="row" style="padding-top:3px;">
-            <input id="v00">
-            <input id="v01">
-            <input id="v02" style="padding-right:8px;">
-            <input id="v03">
-            <input id="v04">
-            <input id="v05" style="padding-right:8px;">
-            <input id="v06">
-            <input id="v07">
-            <input id="v08">
+        -->
+        <div class="row-q1">
+            <div id="row-0" class="row">
+                <div class="col-q1">
+                    <input id="v00">
+                    <input id="v01">
+                    <input id="v02">
+                </div>
+                <div class="col-q1">
+                    <input id="v03">
+                    <input id="v04">
+                    <input id="v05">
+                </div>
+                <div class="col-q1">
+                    <input id="v06">
+                    <input id="v07">
+                    <input id="v08">
+                </div>
+            </div>
+
+            <div id="row-1" class="row">
+                <div class="col-q1">
+                    <input id="v10">
+                    <input id="v11">
+                    <input id="v12">
+                </div>
+                <div class="col-q2">
+                    <input id="v13">
+                    <input id="v14">
+                    <input id="v15">
+                </div>
+                <div class="col-q3">
+                    <input id="v16">
+                    <input id="v17">
+                    <input id="v18">
+                </div>
+            </div>
+
+            <div id="row-2" class="row">
+                <div class="col-q1">
+                    <input id="v20">
+                    <input id="v21">
+                    <input id="v22">
+                </div>
+                <div class="col-q2">
+                    <input id="v23">
+                    <input id="v24">
+                    <input id="v25">
+                </div>
+                <div class="col-q3">
+                    <input id="v26">
+                    <input id="v27">
+                    <input id="v28">
+                </div>
+
+            </div>
         </div>
-        <div id="row-1" class="row">
-            <input id="v10">
-            <input id="v11">
-            <input id="v12" style="padding-right:8px;">
-            <input id="v13">
-            <input id="v14">
-            <input id="v15" style="padding-right:8px;">
-            <input id="v16">
-            <input id="v17">
-            <input id="v18">
+
+
+        <div class="row-q2">
+            <div id="row-3" class="row">
+                <div class="col-q1">
+                    <input id="v30">
+                    <input id="v31">
+                    <input id="v32">
+                </div>
+                <div class="col-q2">
+                    <input id="v33">
+                    <input id="v34">
+                    <input id="v35">
+                </div>
+                <div class="col-q3">
+                     <input id="v36">
+                    <input id="v37">
+                    <input id="v38">
+                </div>
+            </div>
+            <div id="row-4" class="row">
+                <div class="col-q1">
+                    <input id="v40">
+                    <input id="v41">
+                    <input id="v42">
+                </div>
+                <div class="col-q2">
+                    <input id="v43">
+                    <input id="v44">
+                    <input id="v45">
+                </div>
+                <div class="col-q3">
+                    <input id="v46">
+                    <input id="v47">
+                    <input id="v48">
+                </div>
+            </div>
+
+            <div id="row-5" class="row">
+                <div class="col-q1">
+                    <input id="v50">
+                    <input id="v51">
+                    <input id="v52">
+                </div>
+                <div class="col-q2">
+                    <input id="v53">
+                    <input id="v54">
+                    <input id="v55">
+                </div>
+                <div class="col-q3">
+                    <input id="v56">
+                    <input id="v57">
+                    <input id="v58">
+                </div>
+            </div>
         </div>
-        <div id="row-2" class="row">
-            <input id="v20">
-            <input id="v21">
-            <input id="v22" style="padding-right:8px;">
-            <input id="v23">
-            <input id="v24">
-            <input id="v25" style="padding-right:8px;">
-            <input id="v26">
-            <input id="v27">
-            <input id="v28">
-        </div>
-        <div id="row-3" class="row" style="padding-top:5px;">
-            <input id="v30">
-            <input id="v31">
-            <input id="v32" style="padding-right:8px;">
-            <input id="v33">
-            <input id="v34">
-            <input id="v35" style="padding-right:8px;">
-            <input id="v36">
-            <input id="v37">
-            <input id="v38">
-        </div>
-        <div id="row-4" class="row">
-            <input id="v40">
-            <input id="v41">
-            <input id="v42" style="padding-right:8px;">
-            <input id="v43">
-            <input id="v44">
-            <input id="v45" style="padding-right:8px;">
-            <input id="v46">
-            <input id="v47">
-            <input id="v48">
-        </div>
-        <div id="row-5" class="row">
-            <input id=" 50">
-            <input id="v51">
-            <input id="v52" style="padding-right:8px;">
-            <input id="v53">
-            <input id="v54">
-            <input id="v55" style="padding-right:8px;">
-            <input id="v56">
-            <input id="v57">
-            <input id="v58">
-        </div>
-        <div id="row-6" class="row" style="padding-top:6px;">
-            <input id="v60">
-            <input id="v61">
-            <input id="v62" style="padding-right:8px;">
-            <input id="v63">
-            <input id="v64">
-            <input id="v65" style="padding-right:8px;">
-            <input id="v66">
-            <input id="v67">
-            <input id="v68">
-        </div>
-        <div id="row-7" class="row">
-            <input id="v70">
-            <input id="v71">
-            <input id="v72" style="padding-right:8px;">
-            <input id="v73">
-            <input id="v74">
-            <input id="v75" style="padding-right:8px;">
-            <input id="v76">
-            <input id="v77">
-            <input id="v78">
-        </div>
-        <div id="row-8" class="row">
-            <input id="v80">
-            <input id="v81">
-            <input id="v82" style="padding-right:8px;">
-            <input id="v83">
-            <input id="v84">
-            <input id="v85" style="padding-right:8px;">
-            <input id="v86">
-            <input id="v87">
-            <input id="v88">
+
+        <div class="row-q3" style="border-bottom: 4px solid black">
+            <div id="row-6" class="row">
+                <div class="col-q1">
+                    <input id="v60">
+                    <input id="v61">
+                    <input id="v62">
+                </div>
+                <div class="col-q2">
+                    <input id="v63">
+                    <input id="v64">
+                    <input id="v65">
+                </div>
+                <div class="col-q3">
+                    <input id="v66">
+                    <input id="v67">
+                    <input id="v68">
+                </div>
+            </div>
+            <div id="row-7" class="row">
+                <div class="col-q1">
+                    <input id="v70">
+                    <input id="v71">
+                    <input id="v72">
+                </div>
+                <div class="col-q2">
+                    <input id="v73">
+                    <input id="v74">
+                    <input id="v75">
+                </div>
+                <div class="col-q3">
+                    <input id="v76">
+                    <input id="v77">
+                    <input id="v78">
+                </div>
+            </div>
+            <div id="row-8" class="row">
+                <div class="col-q1">
+                    <input id="v80">
+                    <input id="v81">
+                    <input id="v82">
+                </div>
+                <div class="col-q2">
+                    <input id="v83">
+                    <input id="v84">
+                    <input id="v85">
+                </div>
+                <div class="col-q3">
+                    <input id="v86">
+                    <input id="v87">
+                    <input id="v88">
+                </div>
+            </div>
         </div>
     </div>
     <br>

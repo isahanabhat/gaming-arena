@@ -6,14 +6,7 @@ class SudokuGenerator:
         self.grid = [[0] * 9 for _ in range(9)]
         self.final_placements = []
         self.file = r"../input/sudoku_combinations.csv"
-
-    def is_safe(self, mat, row, col):
-
-        for i in range(row):
-            if mat[i][col]:
-                return 0
-
-        quadrants = {
+        self.quadrants = {
             1 : [[0, 2], [0, 2]],
             2 : [[3, 5], [0, 2]],
             3 : [[6, 8], [0, 2]],
@@ -24,7 +17,25 @@ class SudokuGenerator:
             8 : [[3, 5], [6, 8]],
             9 : [[6, 8], [6, 8]],
         }
-        quadrants_vals = list(quadrants.values())
+
+    def is_safe(self, mat, row, col):
+
+        for i in range(row):
+            if mat[i][col]:
+                return 0
+
+        """quadrants = {
+            1 : [[0, 2], [0, 2]],
+            2 : [[3, 5], [0, 2]],
+            3 : [[6, 8], [0, 2]],
+            4 : [[0, 2], [3, 5]],
+            5 : [[3, 5], [3, 5]],
+            6 : [[6, 8], [3, 5]],
+            7 : [[0, 2], [6, 8]],
+            8 : [[3, 5], [6, 8]],
+            9 : [[6, 8], [6, 8]],
+        }"""
+        quadrants_vals = list(self.quadrants.values())
         quad = 0
         for q in range(1,10):
             if row in range(quadrants_vals[q - 1][0][0], quadrants_vals[q - 1][0][1] + 1):
@@ -32,8 +43,8 @@ class SudokuGenerator:
                     quad = q
                     break
 
-        row_list = quadrants[quad][0]
-        col_list = quadrants[quad][1]
+        row_list = self.quadrants[quad][0]
+        col_list = self.quadrants[quad][1]
 
         for i in range(row_list[0], row_list[1] + 1):
             for j in range(col_list[0], col_list[1] + 1):
@@ -122,13 +133,14 @@ class SudokuGenerator:
                             temp = temp[~(temp[cols[col_num]] == val)].reset_index(drop=True)
                             group_dict[group_number] = temp
                     self.final_placements.append(number_placement[1:])
-
-                print("SUCCESS!")
+                if verbose == 1:
+                    print("SUCCESS!")
                 break
 
             except Exception as e:
-                print("ERROR ENCOUNTERED. RUNNING ALGORITHM AGAIN.", e)
-                print("\n-----------------------------------------------------------------------------\n")
+                if verbose == 1:
+                    print("ERROR ENCOUNTERED. RUNNING ALGORITHM AGAIN.", e)
+                    print("\n-----------------------------------------------------------------------------\n")
 
         number = 1
         for placement in self.final_placements:
@@ -143,9 +155,48 @@ class SudokuGenerator:
 
         return self.grid
 
+    def print_grid(self):
+        for i in self.grid:
+            print(i)
+
+    def remove_values(self, mode):
+        to_remove = 0
+        match mode:
+            case "easy":
+                to_remove = 40
+            case "medium":
+                to_remove = 50
+            case "hard":
+                to_remove = 60
+
+        remove_per_quad = [5, 5, 5, 5, 5, 5, 5, 5, 5]
+        for i in range(9):
+            index = list(range(9))
+            random_index = random.sample(index, 4)
+            # print(random_index)
+            for j in random_index:
+                self.grid[i][j] = 0
+
+        """for key, value in self.quadrants.items():
+            print("Removing from grid ", key)
+            q = []
+            row = 0
+            for i in range(value[0][0], value[0][1] + 1):
+                q.append([])
+                for j in range(value[1][0], value[1][1] + 1):
+                    q[row].append(self.grid[i][j])
+                row += 1
+            print(q)"""
+
+        return self.grid
+
 
 if __name__ == "__main__":
     print()
 
-    s = SudokuGenerator()
-    s.get_sudoku_grid(verbose=1)
+    """s = SudokuGenerator()
+    s.get_sudoku_grid()
+    s.print_grid()
+    s.remove_values("easy")
+    print()
+    s.print_grid()"""

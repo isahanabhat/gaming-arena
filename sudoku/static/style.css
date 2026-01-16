@@ -1,9 +1,9 @@
 #grid {
     position: absolute;
-    top: 10px;
     margin-left: 12px;
     display: grid;
     grid-gap: 0px;
+    border: 2px solid black;
 }
 
 .grid-image{
@@ -12,15 +12,37 @@
 }
 
 input {
-    border: 2px solid #000000;
+    border: 2px solid black;
     background: transparent;
+    background-color: #D8A694;
     display: inline-block;
-    width: 60px;
+    width: 64px;
     height: 64px;
     text-align: center;
+    font-size: 50px;
+    color: white;
+}
+
+input[readonly] {
+    border: 2px solid #000000;
+    background-color: #B79EA1;
+    font-weight: bold;
+    color: black;
 }
 
 .row {
+    display: flex;
+}
+
+.row-q1, .row-q2, .row-q3 {
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    border-top: 4px solid black;
+}
+
+.col-q1, .col-q2, .col-q3 {
+    border-left: 3px solid black;
+    border-right: 3px solid black;
     display: flex;
 }
 
